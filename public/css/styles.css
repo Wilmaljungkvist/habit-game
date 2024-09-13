@@ -18,6 +18,8 @@ header {
 
 main {
   grid-area: main;
+  padding-top: 50px;
+  padding-bottom: 50px;
 }
 main .habits-today {
   border-right-color: #FFF9E3;
@@ -25,11 +27,20 @@ main .habits-today {
   flex-direction: column;
 }
 main .habit {
+  padding: 10px;
+  font-family: Georgia, "Times New Roman", Times, serif;
   display: flex;
-  justify-content: space-around;
+  justify-content: space-between;
+  align-items: center;
   margin: 20px;
   background-color: #FFF9E3;
   border-radius: 20px;
+}
+main input[type=checkbox] {
+  height: 30px;
+  width: 30px;
+  border: solid 3px #B8D8B8;
+  border-radius: 15px;
 }
 
 footer {
