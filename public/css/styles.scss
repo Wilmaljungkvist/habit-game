@@ -1,0 +1,45 @@
+ body {
+    padding-bottom: 100px;
+    display: grid; 
+    grid-template-areas: 
+    "head head head head head"
+    "main main main main main"
+    "footer footer footer footer footer"
+    ;
+    margin: 0;
+    padding: 0; 
+    background-color: #F4D35E;
+ }
+
+ header {
+    text-align: center;
+    top: 0; 
+    background-color: #A67B5B;
+    grid-area: head;
+    color: #FFF9E3; 
+ }
+
+ main {
+    grid-area: main; 
+ }
+
+
+
+
+
+ footer {
+    bottom: 0; 
+    position: absolute;
+    grid-area: footer;
+    margin: 0; 
+    width: 100%; 
+    height: 100px; 
+    background-color: #A67B5B;
+    display: flex; 
+    justify-content: space-around;
+    align-items: center;
+
+    img {
+        width: 40px; 
+    }
+ }

@@ -12,8 +12,14 @@ export class HomeController {
    */
   async index (req, res, next) {
     try {
+      const monthNames = ["Januari", "Februari", "Mars", "April", "Maj", "Juni", "Juli", "Augusti", "September", "Oktober", "November", "December"]
+      const currentDate = new Date()
+      const day = currentDate.getDate()
+      const month = currentDate.getMonth()
+      const monthString = monthNames[month]
+      const date = `${day} ${monthString}`
       const contentType = 'home'
-      res.render('home/index')
+      res.render('home/index', { type: contentType, date})
     } catch (error) {
       next(error)
     }
