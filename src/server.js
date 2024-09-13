@@ -63,21 +63,7 @@ try {
   app.use('/', router)
 
   app.use((err, req, res, next) => {
-    if (err.status === 404) {
-      return res
-        .status(404)
-        .sendFile(join(directoryFullName, 'views', 'errors', '404.html'))
-    }
-
-    if (req.app.get('env') !== 'development') {
-      return res
-        .status(500)
-        .sendFile(join(directoryFullName, 'views', 'errors', '500.html'))
-    }
-
-    res
-      .status(err.status || 500)
-      .render('errors/error', { error: err })
+    console.log(err)
   })
 
   app.listen(process.env.PORT, () => {

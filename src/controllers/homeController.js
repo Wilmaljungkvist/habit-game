@@ -1,8 +1,10 @@
 
+import { testHabits } from "../../test/habits.js"
 /**
  * Encapsulates a controller.
  */
 export class HomeController {
+
   /**
    * Renders the home page.
    *
@@ -19,7 +21,8 @@ export class HomeController {
       const monthString = monthNames[month]
       const date = `${day} ${monthString}`
       const contentType = 'home'
-      res.render('home/index', { type: contentType, date})
+      const habits = testHabits
+      res.render('home/index', { type: contentType, date, habits})
     } catch (error) {
       next(error)
     }

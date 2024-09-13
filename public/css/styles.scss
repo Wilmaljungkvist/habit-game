@@ -1,5 +1,4 @@
  body {
-    padding-bottom: 100px;
     display: grid; 
     grid-template-areas: 
     "head head head head head"
@@ -12,6 +11,8 @@
  }
 
  header {
+    width: 100%; 
+    position: fixed;
     text-align: center;
     top: 0; 
     background-color: #A67B5B;
@@ -21,6 +22,21 @@
 
  main {
     grid-area: main; 
+
+    .habits-today {
+        border-right-color: #FFF9E3;
+        display: flex; 
+        flex-direction: column;
+    }
+
+
+    .habit {
+        display: flex; 
+        justify-content: space-around;
+        margin: 20px; 
+        background-color: #FFF9E3;
+        border-radius: 20px;
+    }
  }
 
 
@@ -29,7 +45,7 @@
 
  footer {
     bottom: 0; 
-    position: absolute;
+    position: fixed;
     grid-area: footer;
     margin: 0; 
     width: 100%; 
