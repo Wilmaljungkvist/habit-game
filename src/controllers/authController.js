@@ -8,11 +8,13 @@ export class AuthController {
                 return res.redirect('/')
             }
             const monthNames = ["Januari", "Februari", "Mars", "April", "Maj", "Juni", "Juli", "Augusti", "September", "Oktober", "November", "December"]
-            const currentDate = new Date()
-            const day = currentDate.getDate()
-            const month = currentDate.getMonth()
-            const monthString = monthNames[month]
-            const date = `${day} ${monthString}`
+      const weekDays = ["Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"]
+      const currentDate = new Date()
+      const day = currentDate.getDate()
+      const weekDay = currentDate.getDay()
+      const month = currentDate.getMonth()
+      const monthString = monthNames[month]
+      const date = `${day} ${monthString} ${weekDays[weekDay]}`
       const contentType = 'home'
 
             res.render('auth/login', { date, type: contentType})
@@ -24,13 +26,15 @@ export class AuthController {
 
     async registerPage (req, res, next) {
         try {
-            const monthNames = ["Januari", "Februari", "Mars", "April", "Maj", "Juni", "Juli", "Augusti", "September", "Oktober", "November", "December"]
-            const currentDate = new Date()
-            const day = currentDate.getDate()
-            const month = currentDate.getMonth()
-            const monthString = monthNames[month]
-            const date = `${day} ${monthString}`
-      const contentType = 'home'
+          const monthNames = ["Januari", "Februari", "Mars", "April", "Maj", "Juni", "Juli", "Augusti", "September", "Oktober", "November", "December"]
+          const weekDays = ["Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"]
+          const currentDate = new Date()
+          const day = currentDate.getDate()
+          const weekDay = currentDate.getDay()
+          const month = currentDate.getMonth()
+          const monthString = monthNames[month]
+          const date = `${day} ${monthString} ${weekDays[weekDay]}`
+          const contentType = 'home'
 
           res.render('auth/register', { date, type: contentType })
         } catch (error) {
