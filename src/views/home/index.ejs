@@ -4,19 +4,23 @@
             <% habits.forEach(habit => { %>
                 <div class="habit">
                     <input type="checkbox" name="habit-checkbox" id="habit-checkbox-<%= habit.id %>" 
-                           data-habit-id="<%= habit.id %>" onclick="updateHabitStatus(this)">
+                           data-habit-id="<%= habit.id %>" 
+                           data-habit-xp="<%= habit.xp %>" 
+                           onclick="updateHabitStatus(this)">
                     <p><%= habit.text %></p>
-                    <p><%= habit.xp %> xp</p>
+                    <p class="xp"><%= habit.xp %> xp</p>
                 </div>
             <% }) %>
         <% } %>
     </div>
 </main>
 
+
 <script>
     async function updateHabitStatus(checkbox) {
-        const habitId = checkbox.getAttribute('data-habit-id');
-        const isChecked = checkbox.checked;
+        const habitId = checkbox.getAttribute('data-habit-id')
+        const isChecked = checkbox.checked
+        const habitXp = checkbox.getAttribute('data-habit-xp')
 
         try {
             const response = await fetch('/update-habit', {
@@ -24,18 +28,20 @@
                 headers: {
                     'Content-Type': 'application/json',
                 },
-                body: JSON.stringify({ habitId, isChecked }),
-            });
+                body: JSON.stringify({ habitId, isChecked, habitXp }),
+            })
 
             if (!response.ok) {
                 throw new Error('Network response was not ok');
             }
 
-            const data = await response.json();
-            console.log(data.message); // Handle success message from the server
+            const data = await response.json()
+            console.log(data.message)
+
+            location.reload()
 
         } catch (error) {
-            console.error('There was a problem with the fetch operation:', error);
+            console.error('There was a problem with the fetch operation:', error)
         }
     }
 </script>

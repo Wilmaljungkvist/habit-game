@@ -56,7 +56,8 @@ export class AuthController {
               username: req.body.username,
               password: req.body.password,
               name: req.body.name,
-              email: req.body.email
+              email: req.body.email,
+              xp: 0
             })
     
             await user.save()

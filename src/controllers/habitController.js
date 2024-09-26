@@ -1,4 +1,5 @@
 import { HabitsModel } from "../models/habitsModel.js"
+import { AuthModel } from '../models/AuthModel.js'
 export class HabitController  {
 
 
@@ -55,8 +56,10 @@ export class HabitController  {
 
       async updateHabit(req, res, next) {
         try {
-            const { habitId, isChecked } = req.body
-            
+            const { habitId, isChecked, habitXp } = req.body
+
+            let userXp = req.session.user.xp + habitXp
+
             const user = req.session.user.username
     
             const updatedHabit = await HabitsModel.findOneAndUpdate(
@@ -64,8 +67,13 @@ export class HabitController  {
                 { doneToday: isChecked }
             )
 
-    
-            res.redirect('/')
+            const updateUser = await AuthModel.findOneAndUpdate(
+                { username: user },
+                { xp: userXp }
+            )
+
+
+            res.json({ message: 'Habit updated successfully' })
         } catch (error) {
             console.error('Error updating habit:', error)
         }
