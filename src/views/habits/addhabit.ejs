@@ -1,0 +1,80 @@
+<div class="add-habits">
+    <form action="/add-habit" method="POST" class="habit-form">
+        <div class="form-group">
+            <label for="text">Habit Text:</label>
+            <input type="text" id="text" name="text" class="form-control" required>
+        </div>
+
+        <div class="form-group">
+            <label for="repeat">Repeat:</label>
+            <select id="repeat" name="repeat" class="form-control" required>
+                <option value="daily">Daily</option>
+                <option value="weekly">Weekly</option>
+                <option value="monthly">Monthly</option>
+            </select>
+        </div>
+
+        <div id="weekly-options" class="form-group hidden">
+            <label>Select Days of the Week:</label>
+            <div class="week-days">
+                <label><input type="checkbox" name="daysOfWeek[]" value="Sunday"> Sunday</label>
+                <label><input type="checkbox" name="daysOfWeek[]" value="Monday"> Monday</label>
+                <label><input type="checkbox" name="daysOfWeek[]" value="Tuesday"> Tuesday</label>
+                <label><input type="checkbox" name="daysOfWeek[]" value="Wednesday"> Wednesday</label>
+                <label><input type="checkbox" name="daysOfWeek[]" value="Thursday"> Thursday</label>
+                <label><input type="checkbox" name="daysOfWeek[]" value="Friday"> Friday</label>
+                <label><input type="checkbox" name="daysOfWeek[]" value="Saturday"> Saturday</label>
+            </div>
+        </div>
+
+        <!-- Days of the month (for monthly option) -->
+        <div id="monthly-options" class="form-group hidden">
+            <label>Select Days of the Month:</label>
+            <div class="month-days">
+                <% for (var i = 1; i <= 31; i++) { %>
+                    <label><input type="checkbox" name="daysOfMonth[]" value="<%= i %>"> <%= i %></label>
+                <% } %>
+            </div>
+        </div>
+
+        <div class="form-group">
+            <label for="xp">XP (Experience Points):</label>
+            <input type="number" id="xp" name="xp" class="form-control" required>
+        </div>
+
+        <div class="form-group">
+            <label for="streak">Is this required for streak?</label>
+            <input type="checkbox" id="streak" name="streak" value="true" class="form-control">
+        </div>
+
+        <div class="form-group">
+            <input type="submit" value="Create Habit" class="btn btn-primary">
+        </div>
+    </form>
+</div>
+
+<script>
+    document.addEventListener('DOMContentLoaded', function () {
+        const repeatSelect = document.getElementById('repeat');
+        const weeklyOptions = document.getElementById('weekly-options');
+        const monthlyOptions = document.getElementById('monthly-options');
+    
+        // Event listener for repeat dropdown
+        repeatSelect.addEventListener('change', function () {
+            const repeatValue = repeatSelect.value;
+    
+            // Show/hide weekly or monthly options based on the selection
+            if (repeatValue === 'weekly') {
+                weeklyOptions.classList.remove('hidden');
+                monthlyOptions.classList.add('hidden');
+            } else if (repeatValue === 'monthly') {
+                monthlyOptions.classList.remove('hidden');
+                weeklyOptions.classList.add('hidden');
+            } else {
+                weeklyOptions.classList.add('hidden');
+                monthlyOptions.classList.add('hidden');
+            }
+        });
+    });
+    </script>
+    

@@ -18,8 +18,12 @@ const habitsSchema = new mongoose.Schema({
     type: Number,
     required: [true, 'Type is required.']
   },
+  streak: {
+    type: Boolean,
+    required: [true, 'Is it required for streak?']
+  },
 })
 
-postSchema.add(BASE_SCHEMA)
+habitsSchema.add(BASE_SCHEMA)
 
 export const HabitsModel = mongoose.model('Habits', habitsSchema)
