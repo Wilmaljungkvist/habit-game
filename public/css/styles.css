@@ -39,8 +39,6 @@ main .habit {
 main input[type=checkbox] {
   height: 30px;
   width: 30px;
-  border: solid 3px #B8D8B8;
-  border-radius: 15px;
 }
 
 footer {
@@ -57,4 +55,24 @@ footer {
 }
 footer img {
   width: 40px;
+}
+
+.alert {
+  margin-top: 20px;
+  padding: 15px;
+  margin-bottom: 20px;
+  border: 1px solid transparent;
+  border-radius: 4px;
+}
+
+.alert-success {
+  color: #0a5d1e;
+  background-color: #c6e4c7;
+  border-color: #c3e6cb;
+}
+
+.alert-danger {
+  color: #550e1d;
+  background-color: #f0a0a7;
+  border-color: #f5c6cb;
 }/*# sourceMappingURL=styles.css.map */
