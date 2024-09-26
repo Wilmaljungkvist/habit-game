@@ -22,6 +22,10 @@ const habitsSchema = new mongoose.Schema({
     type: Boolean,
     required: [true, 'Is it required for streak?']
   },
+  doneToday: {
+    type: Boolean, 
+    required: [true]
+}
 })
 
 habitsSchema.add(BASE_SCHEMA)

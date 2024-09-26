@@ -22,3 +22,4 @@ const protectedRoute = (req, res, next) => {
 
 router.get('/add-habit', protectedRoute, (req, res, next) => controller.index(req, res, next))
 router.post('/add-habit', (req, res, next) => controller.addHabit(req, res, next))
+router.post('/update-habit', (req, res, next) => controller.updateHabit(req, res, next))

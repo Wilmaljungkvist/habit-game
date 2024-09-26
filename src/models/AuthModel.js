@@ -31,6 +31,10 @@ const schema = new mongoose.Schema({
     minLength: [8, 'The password must be of minimum length 8 characters.'],
     maxLength: [256, 'The password must be of maximum length 256 characters.']
   },
+  xp: {
+      type: Number,
+      required: [false],
+  },
   resetPasswordToken: String,
   resetPasswordExpires: Date
 })

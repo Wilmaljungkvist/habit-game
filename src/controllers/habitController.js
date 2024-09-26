@@ -40,7 +40,8 @@ export class HabitController  {
                 creator: req.session.user.username,
                 repeat: req.body.repeat,
                 xp: req.body.xp,
-                streak: req.body.streak
+                streak: req.body.streak,
+                doneToday: false
             })
     
             await habit.save()
@@ -50,4 +51,24 @@ export class HabitController  {
             console.log(error)
         }
       }
+
+
+      async updateHabit(req, res, next) {
+        try {
+            const { habitId, isChecked } = req.body
+            
+            const user = req.session.user.username
+    
+            const updatedHabit = await HabitsModel.findOneAndUpdate(
+                { _id: habitId, creator: user },
+                { doneToday: isChecked }
+            )
+
+    
+            res.redirect('/')
+        } catch (error) {
+            console.error('Error updating habit:', error)
+        }
+    }
+    
 }
