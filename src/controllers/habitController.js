@@ -21,6 +21,20 @@ export class HabitController  {
 
       async addHabit (req, res, next) {
         try {
+            if (req.body.streak === undefined ) {
+                req.body.streak = false
+            }
+
+            if (req.body.daysOfMonth !== undefined) {
+                req.body.repeat = req.body.daysOfMonth
+            } else if (req.body.daysOfWeek !== undefined ) {
+                req.body.repeat = req.body.daysOfWeek
+            } 
+
+            if (typeof req.body.repeat === 'string') {
+                req.body.repeat = [req.body.repeat]
+            }
+
             const habit = new HabitsModel({
                 text: req.body.text, 
                 creator: req.session.user.username,

@@ -25,7 +25,21 @@ export class HomeController {
       const date = `${day} ${monthString} ${weekDays[weekDay]}`
       const contentType = 'home'
       
-      const habits = await HabitsModel.find({ creator: req.session.user.username })
+      const userHabits = await HabitsModel.find({ creator: req.session.user.username })
+      
+
+      let habits = []
+      for (let i = 0; i < userHabits.length; i++) {
+        console.log(userHabits[i])
+        if (userHabits[i].repeat.includes('daily')) {
+          console.log('daily')
+          habits.push(userHabits[i])
+        } else if (userHabits[i].repeat.includes(weekDays[weekDay])) {
+          habits.push(userHabits[i])
+        } else if (userHabits[i].repeat.includes(day)) {
+          habits.push(userHabits[i])
+        }
+      }
 
       res.render('home/index', { type: contentType, date, habits})
     } catch (error) {

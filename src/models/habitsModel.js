@@ -11,7 +11,7 @@ const habitsSchema = new mongoose.Schema({
     required: [true, 'Creator is required.']
   },
   repeat: {
-    type: String,
+    type: Array,
     required: [true, 'Type is required.']
   },
   xp: {

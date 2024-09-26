@@ -93,10 +93,18 @@ export class AuthController {
               res.redirect('/login')
             }
           }
+
+          const monthNames = ["Januari", "Februari", "Mars", "April", "Maj", "Juni", "Juli", "Augusti", "September", "Oktober", "November", "December"]
+            const weekDays = ["Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"]
+            const currentDate = new Date()
+            const day = currentDate.getDate()
+            const weekDay = currentDate.getDay()
+            const month = currentDate.getMonth()
+            const monthString = monthNames[month]
+            const date = `${day} ${monthString} ${weekDays[weekDay]}`
+            const contentType = 'home'
     
-          const logo = '/img/BDTSMedia.png'
-          const type = 'home'
-          res.render('information/index', { logo, type })
+          res.render('home/index', { type: contentType, date })
         } catch (error) {
           next(error)
         }
