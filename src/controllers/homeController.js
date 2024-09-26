@@ -27,13 +27,20 @@ export class HomeController {
       
       const userHabits = await HabitsModel.find({ creator: req.session.user.username })
 
-      console.log(userHabits)
-
       let habits = []
       for (let i = 0; i < userHabits.length; i++) {
-        const dateUpdated = userHabits.updatedAt
-        console.log(dateUpdated)
-        console.log(currentDate)
+        const dateUpdated = `${userHabits[i].updatedAt}`.slice(0,10)
+        const dateToday = `${currentDate}`.slice(0,10)
+
+
+
+        if (dateUpdated !== dateToday) {
+          console.log('Update')
+          userHabits[i].doneToday = false
+          userHabits[i].save()
+        }
+
+        await HabitsModel.find({ _id: userHabits[i].id})
         
         if (userHabits[i].doneToday === false) {
           if (userHabits[i].repeat.includes('daily')) {
