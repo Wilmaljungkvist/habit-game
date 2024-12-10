@@ -21,7 +21,10 @@ const protectedRoute = (req, res, next) => {
   }
 
 router.get('/login', protectedRoute, (req, res, next) => controller.index(req, res, next))
-// router.get('/login/forgot-password', (req, res, next) => controller.index(req, res, next))
 router.get('/register', protectedRoute, (req, res, next) => controller.registerPage(req, res, next))
 router.post('/register', (req, res, next) => controller.registerUser(req, res, next))
 router.post('/login', (req, res, next) => controller.loginUser(req, res, next))
+router.post('/login/forgot-password', (req, res, next) => controller.forgotPassword(req, res, next))
+router.get('/login/forgot-password', (req, res, next) => controller.getForgotPassword(req, res, next))
+router.post('/login/reset-password/:token', (req, res, next) => controller.resetPassword(req, res, next))
+router.get('/login/reset-password/:token', (req, res, next) => controller.getResetPassword(req, res, next))

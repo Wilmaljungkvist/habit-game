@@ -1,5 +1,8 @@
 import { AuthModel } from '../models/AuthModel.js'
 import bcrypt from 'bcrypt'
+import crypto from 'crypto'
+import nodemailer from 'nodemailer'
+
 export class AuthController {
 
     async index (req, res, next) {
@@ -111,4 +114,82 @@ export class AuthController {
         }
       }
 
+      async forgotPassword (req, res, next) {
+        try {
+          const { email } = req.body
+          const user = await AuthModel.findOne({ email })
+    
+          if (user !== null) {
+            const token = crypto.randomBytes(20).toString('hex')
+            user.resetPasswordToken = token
+            user.resetPasswordExpires = Date.now() + 3600000
+            await user.save()
+            const transporter = nodemailer.createTransport({
+              host: 'smtp.gmail.com',
+              port: 587,
+              secure: false,
+              auth: {
+                user: process.env.EMAIL,
+                pass: process.env.PASSWORD
+              }
+            })
+    
+            const mailOptions = {
+              from: process.env.EMAIL,
+              to: email,
+              subject: 'Reset your password',
+              text: 'You are receiving this because you (or someone else) have requested to reset the password for your account.\n\n' +
+            'Please click on the following link, or paste this into your browser to complete the process:\n\n' +
+            `http://${req.headers.host}/admin/reset-password/${token}\n\n` +
+            'If you did not request this, please ignore this email and your password will remain unchanged.\n'
+            }
+    
+            transporter.sendMail(mailOptions, (error, info) => {
+              if (error) {
+                console.error('Error:', error)
+                req.session.flash = { type: 'danger', text: 'Failed to send password reset email' }
+                res.redirect('/')
+              } else {
+                console.log('Email sent:', info.response)
+                req.session.flash = { type: 'success', text: 'Password reset email sent successfully!' }
+                res.redirect('/')
+              }
+            })
+          }
+
+          const monthNames = ["Januari", "Februari", "Mars", "April", "Maj", "Juni", "Juli", "Augusti", "September", "Oktober", "November", "December"]
+          const weekDays = ["Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"]
+          const currentDate = new Date()
+          const day = currentDate.getDate()
+          const weekDay = currentDate.getDay()
+          const month = currentDate.getMonth()
+          const monthString = monthNames[month]
+          const date = `${day} ${monthString} ${weekDays[weekDay]}`
+          const contentType = 'home'
+  
+        res.render('auth/forgotPasswordText', { type: contentType, date, email })
+        } catch (error) {
+          next(error)
+        }
+      }
+
+
+      async getForgotPassword (req, res, next) {
+        try {
+
+          const monthNames = ["Januari", "Februari", "Mars", "April", "Maj", "Juni", "Juli", "Augusti", "September", "Oktober", "November", "December"]
+          const weekDays = ["Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"]
+          const currentDate = new Date()
+          const day = currentDate.getDate()
+          const weekDay = currentDate.getDay()
+          const month = currentDate.getMonth()
+          const monthString = monthNames[month]
+          const date = `${day} ${monthString} ${weekDays[weekDay]}`
+          const contentType = 'home'
+    
+          res.render('auth/forgotPassword', { date, type: contentType})
+        } catch (error) {
+          next(error)
+        }
+      }
 }
