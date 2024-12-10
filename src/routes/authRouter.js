@@ -28,3 +28,4 @@ router.post('/login/forgot-password', (req, res, next) => controller.forgotPassw
 router.get('/login/forgot-password', (req, res, next) => controller.getForgotPassword(req, res, next))
 router.post('/login/reset-password/:token', (req, res, next) => controller.resetPassword(req, res, next))
 router.get('/login/reset-password/:token', (req, res, next) => controller.getResetPassword(req, res, next))
+router.get('/logout', (req, res, next) => controller.logoutUser(req, res, next))

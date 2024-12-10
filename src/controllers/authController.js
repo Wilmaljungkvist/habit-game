@@ -248,4 +248,15 @@ export class AuthController {
           next(error)
         }
       }
+
+      async logoutUser (req, res, next) {
+        const loggedIn = await req.session.user
+        if (loggedIn) {
+          delete req.session.user
+          req.session.flash = { type: 'success', text: 'Lyckad utloggning!' }
+          res.redirect('/login')
+        } else {
+          res.status(404).send('Not found')
+        }
+      }
 }
