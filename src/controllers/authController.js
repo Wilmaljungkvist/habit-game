@@ -140,7 +140,7 @@ export class AuthController {
               subject: 'Reset your password',
               text: 'You are receiving this because you (or someone else) have requested to reset the password for your account.\n\n' +
             'Please click on the following link, or paste this into your browser to complete the process:\n\n' +
-            `http://${req.headers.host}/admin/reset-password/${token}\n\n` +
+            `http://${req.headers.host}/login/reset-password/${token}\n\n` +
             'If you did not request this, please ignore this email and your password will remain unchanged.\n'
             }
     
@@ -188,6 +188,62 @@ export class AuthController {
           const contentType = 'home'
     
           res.render('auth/forgotPassword', { date, type: contentType})
+        } catch (error) {
+          next(error)
+        }
+      }
+
+
+      async resetPassword (req, res, next) {
+        try {
+          const { token } = req.params
+          const { password } = req.body
+    
+          const user = await AuthModel.findOne({
+            resetPasswordToken: token,
+            resetPasswordExpires: { $gt: Date.now() }
+          })
+    
+          if (!user) {
+            req.session.flash = { type: 'danger', text: 'Password reset token is invalid or has expired' }
+            return res.redirect('/')
+          }
+    
+          user.password = password
+          user.resetPasswordToken = undefined
+          user.resetPasswordExpires = undefined
+          await user.save()
+    
+          req.session.flash = { type: 'success', text: 'Password reset successful!' }
+          res.redirect('/login')
+        } catch (error) {
+          next(error)
+        }
+      }
+
+
+      async getResetPassword (req, res, next) {
+        try {
+          const token = req.params.token
+          const user = await AuthModel.findOne({
+            resetPasswordToken: req.params.token,
+            resetPasswordExpires: { $gt: Date.now() }
+          })
+          if (!user) {
+            req.session.flash = { type: 'danger', text: 'Password reset token is invalid or has expired' }
+            return res.redirect('/')
+          }
+          const monthNames = ["Januari", "Februari", "Mars", "April", "Maj", "Juni", "Juli", "Augusti", "September", "Oktober", "November", "December"]
+          const weekDays = ["Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"]
+          const currentDate = new Date()
+          const day = currentDate.getDate()
+          const weekDay = currentDate.getDay()
+          const month = currentDate.getMonth()
+          const monthString = monthNames[month]
+          const date = `${day} ${monthString} ${weekDays[weekDay]}`
+          const contentType = 'home'
+    
+          res.render('auth/newPassword', { date, type: contentType, token})
         } catch (error) {
           next(error)
         }
