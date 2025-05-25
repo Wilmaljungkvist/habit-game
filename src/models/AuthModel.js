@@ -5,6 +5,7 @@ import { BASE_SCHEMA } from './baseSchema.js'
 
 const { isEmail } = validator
 
+// TODO: bör finnas för lvl. streak, level xp, längsta streak osv. 
 const schema = new mongoose.Schema({
   name: {
     type: String,
@@ -34,6 +35,14 @@ const schema = new mongoose.Schema({
   xp: {
       type: Number,
       required: [false],
+  },
+  rewards: {
+    type: Array, 
+    required: [false],
+  }, 
+  goals: {
+    type: Array, 
+    required: [false],
   },
   resetPasswordToken: String,
   resetPasswordExpires: Date

@@ -1,3 +1,5 @@
+ $yellow-bgc: #F4D35E;
+ 
  body {
     display: grid; 
     grid-template-areas: 
@@ -7,7 +9,7 @@
     ;
     margin: 0;
     padding: 0; 
-    background-color: #F4D35E;
+    background-color: $yellow-bgc;
  }
 
  header {
@@ -270,5 +272,105 @@ p {
 .month-days label {
    display: inline-block;
    margin: 5px 2px;
+}
+
+
+.account-container {
+   display: flex;
+   flex-direction: column;
+   align-items: center;
+   margin: 50px auto;
+   padding: 20px;
+   width: 300px;
+   background-color: #FFF9E3;
+   border-radius: 10px;
+   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+   font-family: Georgia, 'Times New Roman', Times, serif;
+   color: #333;
+}
+
+.account-container p {
+   margin: 8px 0;
+   font-size: 16px;
+   text-align: left;
+   width: 100%;
+}
+
+.account-container p:nth-child(even) {
+   font-weight: bold;
+   color: #A67B5B;
+}
+
+.account-container h2 {
+   font-weight: bold;
+   color: #A67B5B;
+}
+
+
+
+.level-container {
+   display: flex;
+   flex-direction: column;
+   align-items: center;
+   margin: 50px auto;
+   padding: 20px;
+   width: 300px;
+   background-color: #FFF9E3;
+   border-radius: 10px;
+   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+   font-family: Georgia, 'Times New Roman', Times, serif;
+   color: #333;
+}
+
+.level-container p {
+   font-size: 16px;
+   margin: 8px 0;
+   text-align: center;
+   color: #A67B5B;
+   font-weight: bold;
+}
+
+.level-container form {
+   width: 100%;
+   display: flex;
+   flex-direction: column;
+   margin: 15px 0;
+}
+
+.level-container label {
+   color: #A67B5B;
+   font-weight: bold;
+   margin-bottom: 5px;
+}
+
+.level-container input[type="text"] {
+   padding: 8px;
+   border: 1px solid #A67B5B;
+   border-radius: 5px;
+   font-size: 14px;
+   background-color: #FFF9E3;
+   color: #333;
+   margin-bottom: 10px;
+}
+
+.level-container input[type="text"]:focus {
+   outline: none;
+   border-color: #F4D35E;
+}
+
+.level-container button {
+   padding: 10px;
+   background-color: #A67B5B;
+   color: #FFF9E3;
+   border: none;
+   border-radius: 5px;
+   cursor: pointer;
+   font-size: 16px;
+   font-weight: bold;
+   transition: background-color 0.3s ease;
+}
+
+.level-container button:hover {
+   background-color: #F4D35E;
 }
 

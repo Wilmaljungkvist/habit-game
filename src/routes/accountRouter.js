@@ -21,3 +21,5 @@ const protectedRoute = (req, res, next) => {
   }
 
 router.get('/account', protectedRoute, (req, res, next) => controller.index(req, res, next))
+router.post('/add-goals', protectedRoute, (req, res, next) => controller.addGoals(req, res, next))
+router.post('/add-rewards', protectedRoute, (req, res, next) => controller.addRewards(req, res, next))

@@ -1,1 +1,25 @@
-<h1>Hej</h1>
+<div class="level-container">
+    <p>List of level up rewards</p>
+    <% if (rewards.length > 0 ) { %>
+        <% for (let i = 0; i < rewards.length; i++) { %>
+            <p><%= rewards[i] %></p>
+        <% } %>
+    <% } %>
+    <form action="/add-rewards" method="post" class="add-rewards">
+        <label for="reward">Add a reward</label>
+        <input type="text" id="reward" name="reward">
+        <button>Add reward</button>
+    </form>
+
+    <p>List of Goals you want to reach</p>
+    <% if (goals.length > 0 ) { %>
+        <% for (let i = 0; i < goals.length; i++) { %>
+            <p><%= goals[i] %></p>
+        <% } %>
+    <% } %>
+    <form action="/add-goals" method="post" class="add-goals">
+        <label for="goal">Add a goal</label>
+        <input type="text" id="goal" name="goal">
+        <button>Add goal</button>
+    </form>
+</div>
