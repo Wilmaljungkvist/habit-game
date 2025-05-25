@@ -34,16 +34,40 @@ const schema = new mongoose.Schema({
   },
   xp: {
       type: Number,
-      required: [false],
+      required: [true],
+  },
+  level: {
+    type: Number,
+    required: [true],
+  },
+  levelxp: {
+    type: Number,
+    required: [true],
   },
   rewards: {
     type: Array, 
     required: [false],
   }, 
+  levelIncrease: {
+    type: Number,
+    required: [true],
+},
   goals: {
     type: Array, 
     required: [false],
   },
+  streak: {
+    type: Number,
+    required: [true],
+  },
+  longestStreak: {
+  type: Number,
+  required: [true],
+}, 
+basexpToLevel: {
+  type: Number, 
+  required: [true],
+},
   resetPasswordToken: String,
   resetPasswordExpires: Date
 })

@@ -1,7 +1,9 @@
 import { AuthModel } from '../models/AuthModel.js'
 export class AccountController {
+    // TODO: add logout button. 
     index (req, res, next) {
         try {
+            const user = req.session.user
             const monthNames = ["Januari", "Februari", "Mars", "April", "Maj", "Juni", "Juli", "Augusti", "September", "Oktober", "November", "December"]
             const weekDays = ["Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"]
             const currentDate = new Date()
@@ -11,19 +13,27 @@ export class AccountController {
             const monthString = monthNames[month]
             const date = `${day} ${monthString} ${weekDays[weekDay]}`
             const contentType = 'acc'
-            const name = req.session.user.name
-            const username = req.session.user.username
-            const mail = req.session.user.email
-            const xp = req.session.user.xp
+            const name = user.name
+            const username = user.username
+            const mail = user.email
+            const xp = user.xp
+            const level = user.level
+            const longestStreak = user.longestStreak
+            const streak = user.streak
+            const levelxp = user.levelxp
+            const levelIncrease = user.levelIncrease
+            const basexpToLevel = 100
             console.log(req.session.user)
 
-            res.render('account/index', { type: contentType, date, username, mail, xp, name })
+
+            res.render('account/index', { type: contentType, basexpToLevel, date, levelIncrease, username, mail, xp, name, level, longestStreak, streak, levelxp })
         } catch (err) {
             next(err)
         }
     }
 
 
+    // Ska man välja reward när man levlar upp eller har förbestämt?
     async addGoals (req, res, next) {
          // TODO: OM någon lägger till task på två enheter. Hämta om tasks eller? 
          try {

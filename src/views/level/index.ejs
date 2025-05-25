@@ -1,4 +1,17 @@
 <div class="level-container">
+    <h2>Progress and tracking</h2>
+    <% 
+    const xpForNextLevel = basexpToLevel * Math.pow(levelIncrease, level);
+    const xpPercent = Math.min((levelxp / xpForNextLevel) * 100, 100).toFixed(2); 
+%>
+
+<div class="xp-progress-container">
+    <div class="xp-label">Level <%= level %> – <%= levelxp %> / <%= Math.round(xpForNextLevel) %> XP</div>
+    <div class="xp-bar">
+        <div class="xp-fill" style="width: <%= xpPercent %>%;"></div>
+    </div>
+</div>
+
     <p>List of level up rewards</p>
     <% if (rewards.length > 0 ) { %>
         <% for (let i = 0; i < rewards.length; i++) { %>
