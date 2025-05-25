@@ -1,5 +1,6 @@
 <div class="level-container">
     <h2>Progress and tracking</h2>
+    <p>Streak: <%= streak %></p>
     <% 
     const xpForNextLevel = basexpToLevel * Math.pow(levelIncrease, level);
     const xpPercent = Math.min((levelxp / xpForNextLevel) * 100, 100).toFixed(2); 

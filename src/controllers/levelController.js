@@ -37,7 +37,7 @@ export class LevelController {
             // TODO: Se hur ofta man vill öka level. Typ när man nått level multiplicera existerande nivå med 1,1 typ. 
             // TODO: bör level liksom bara läggas på varandra eller "nollställas" per level. 
             // Ide kan vara att de nollställs i level tab men att man i account alltid kan se total xp.
-            res.render('level/index', { type: contentType, basexpToLevel, levelIncrease, level, levelxp, xpForNextLevel, xpPercentage, date, rewards, goals })
+            res.render('level/index', { type: contentType, streak, basexpToLevel, levelIncrease, level, levelxp, xpForNextLevel, xpPercentage, date, rewards, goals })
         } catch (err) {
             next(err)
         }
