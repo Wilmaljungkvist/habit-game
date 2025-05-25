@@ -13,7 +13,7 @@ export class HabitController  {
             const month = currentDate.getMonth()
             const monthString = monthNames[month]
             const date = `${day} ${monthString} ${weekDays[weekDay]}`
-            const contentType = 'home'
+            const contentType = 'add'
           res.render('habits/addhabit', { type: contentType, date })
         } catch (error) {
           next(error)

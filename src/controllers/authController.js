@@ -51,6 +51,7 @@ export class AuthController {
         try {
           const existingUser = await AuthModel.findOne({ username: req.body.username })
     
+          // TODO: checka om användare existerar medans användare skriver för att inte all progress ska försvinna. 
           if (existingUser) {
             req.session.flash = { type: 'danger', text: 'Användarnamnet används redan' }
             res.redirect('/login')

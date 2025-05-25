@@ -2,6 +2,12 @@
     <nav class="navbar">
       <% if (type === 'home') { %>
       <h1><%= date %></h1>
-      <% } %>
+      <% } else if (type === 'level') { %>
+        <h1>Progress</h1>
+        <% }  else if (type === 'add') { %>
+          <h1>Add a new habit</h1>
+          <% } else if (type === 'acc') { %>
+            <h1>Account details</h1>
+        <%  } %>
     </nav>
   </header>
